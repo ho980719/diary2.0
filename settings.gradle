@@ -1,0 +1,4 @@
+rootProject.name = 'diary'
+include 'diary-core'
+include 'diary-api'
+include 'diary-domain'
