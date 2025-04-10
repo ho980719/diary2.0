@@ -1,9 +1,12 @@
 package com.ho.diary.core.security.service;
 
+import com.ho.diary.core.exception.BusinessException;
+import com.ho.diary.core.exception.enums.ErrorCode;
 import com.ho.diary.core.security.dto.LoginRequest;
 import com.ho.diary.core.security.dto.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,20 +20,26 @@ public class AuthService {
   private final JwtTokenProvider jwtTokenProvider;
 
   public TokenResponse login(LoginRequest request) {
-    jwtTokenProvider.printSecret();
+    try {
+      Authentication auth = authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(
+          request.getUsername(),
+          request.getPassword()
+        )
+      );
 
-    Authentication auth = authenticationManager.authenticate(
-      new UsernamePasswordAuthenticationToken(
-        request.getUsername(),
-        request.getPassword()
-      )
-    );
-    String token = jwtTokenProvider.createToken(
-      auth.getName(),
-      auth.getAuthorities().stream()
-        .map(GrantedAuthority::getAuthority)
-        .toList()
-    );
-    return new TokenResponse(token);
+      String token = jwtTokenProvider.createToken(
+        auth.getName(),
+        auth.getAuthorities().stream()
+          .map(GrantedAuthority::getAuthority)
+          .toList()
+      );
+
+      return new TokenResponse(token);
+
+    } catch (BadCredentialsException e) {
+      // 🔥 여기서 커스텀 예외로 감싸서 던져줌
+      throw new BusinessException(ErrorCode.INVALID_USERNAME_PASSWORD);
+    }
   }
 }

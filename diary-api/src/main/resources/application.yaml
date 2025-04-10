@@ -4,23 +4,26 @@ spring:
   config:
     import:
       - classpath:application-core.yaml
-h2:
-  console:
-    enabled: true
-    path: /h2-console
 
-datasource:
-  driver-class-name: org.h2.Driver
-  url: jdbc:h2:~/test
-  username: sa
-  password:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/diary
+    username: ho980719
+    password: rlawnsgh12!
 
-jpa:
-  show_sql: true
-  hibernate:
-    ddl-auto: none
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
 
 logging:
   level:
     root: INFO
     com.ho.diary: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE

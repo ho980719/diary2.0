@@ -24,6 +24,14 @@ public class ErrorResponse {
     this.errors = null;
   }
 
+  public ErrorResponse(ErrorCode errorCode, String message) {
+    this.code = errorCode.getCode();
+    this.message = message;
+    this.status = errorCode.getStatus().value();
+    this.timestamp = LocalDateTime.now();
+    this.errors = null;
+  }
+
   // Validation 예외용 생성자
   public ErrorResponse(ErrorCode errorCode, BindingResult bindingResult) {
     this.code = errorCode.getCode();

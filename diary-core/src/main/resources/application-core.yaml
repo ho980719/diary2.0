@@ -1,5 +1,5 @@
 jwt:
-  secret: ZGlhcnktcHJvamVjdC1hdXRoZW50aWNhdGlvbg==
+  secret: t8pWsvdK3P1YvnljZgNHFKLqQ2l9WZ3Um4UVFcYTfd8=
 
 spring:
   jackson:

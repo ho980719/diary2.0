@@ -14,7 +14,8 @@ public enum ErrorCode {
   MISSING_REQUEST_PARAMETER("MISSING_REQUEST_PARAMETER", "필수 요청 파라미터가 누락되었습니다.", HttpStatus.BAD_REQUEST),
   METHOD_NOT_ALLOWED("METHOD_NOT_ALLOWED", "지원하지 않는 HTTP 메서드입니다.", HttpStatus.METHOD_NOT_ALLOWED),
   ACCESS_DENIED("ACCESS_DENIED", "접근 권한이 없습니다.", HttpStatus.FORBIDDEN),
-  UNAUTHORIZED("UNAUTHORIZED", "인증이 필요합니다.", HttpStatus.UNAUTHORIZED),
+  INVALID_JWT("UNAUTHORIZED", "토큰 인증이 필요합니다.", HttpStatus.UNAUTHORIZED),
+  INVALID_USERNAME_PASSWORD("INVALID_USERNAME_PASSWORD", "아이디/비밀번호를 확인해주세요.", HttpStatus.UNAUTHORIZED),
   ;
 
   private final String code;

@@ -1,5 +1,6 @@
 package com.ho.diary.core.config;
 
+import com.ho.diary.core.security.exception.CustomAuthenticationEntryPoint;
 import com.ho.diary.core.security.filter.JwtAuthenticationFilter;
 import com.ho.diary.core.security.service.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -24,7 +24,7 @@ public class SecurityConfig {
   private final JwtTokenProvider jwtTokenProvider;
   private final AuthenticationConfiguration authenticationConfiguration;
   private final AccessDeniedHandler customAccessDeniedHandler;
-  private final AuthenticationEntryPoint customAuthenticationEntryPoint;
+  private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
   @Bean
   public AuthenticationManager authenticationManager() throws Exception {
@@ -36,14 +36,15 @@ public class SecurityConfig {
     http.csrf(AbstractHttpConfigurer::disable)
       .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/v1/auth/**").permitAll()
+        .requestMatchers("/api/v1/auth/login").permitAll()
         .anyRequest().authenticated()
       )
       .exceptionHandling(ex -> ex
         .accessDeniedHandler(customAccessDeniedHandler)
         .authenticationEntryPoint(customAuthenticationEntryPoint)
       )
-      .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+      .addFilterAfter(new JwtAuthenticationFilter(jwtTokenProvider, customAuthenticationEntryPoint), UsernamePasswordAuthenticationFilter.class)
+    ;
 
     return http.build();
   }

@@ -1,4 +1,4 @@
-package com.ho.diary.core.exception.handler;
+package com.ho.diary.core.security.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ho.diary.core.exception.dto.ErrorResponse;
@@ -26,7 +26,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     response.setStatus(HttpStatus.UNAUTHORIZED.value());
     response.setContentType("application/json;charset=UTF-8");
 
-    ErrorResponse errorResponse = new ErrorResponse(ErrorCode.UNAUTHORIZED);
+    ErrorResponse errorResponse = new ErrorResponse(ErrorCode.INVALID_JWT);
     response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
   }
 }

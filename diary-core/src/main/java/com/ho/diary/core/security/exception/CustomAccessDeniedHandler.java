@@ -1,4 +1,4 @@
-package com.ho.diary.core.exception.handler;
+package com.ho.diary.core.security.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ho.diary.core.exception.dto.ErrorResponse;
@@ -18,7 +18,6 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
   @Override
   public void handle(HttpServletRequest request, HttpServletResponse response,
     AccessDeniedException accessDeniedException) throws IOException {
-
     ErrorResponse errorResponse = new ErrorResponse(ErrorCode.ACCESS_DENIED);
 
     response.setStatus(HttpServletResponse.SC_FORBIDDEN);
