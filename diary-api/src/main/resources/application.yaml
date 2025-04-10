@@ -19,3 +19,8 @@ jpa:
   show_sql: true
   hibernate:
     ddl-auto: none
+
+logging:
+  level:
+    root: INFO
+    com.ho.diary: DEBUG

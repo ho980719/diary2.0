@@ -1,2 +1,8 @@
 jwt:
   secret: ZGlhcnktcHJvamVjdC1hdXRoZW50aWNhdGlvbg==
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd'T'HH:mm:ss

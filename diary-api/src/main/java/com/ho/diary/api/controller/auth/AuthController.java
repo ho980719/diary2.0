@@ -7,17 +7,22 @@ import com.ho.diary.core.security.dto.TokenResponse;
 import com.ho.diary.core.security.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
   private final AuthService authService;
+
+  @GetMapping("/test")
+  public Map<String, LocalDateTime> getNow() {
+    return Map.of("now", LocalDateTime.now());
+  }
 
   @PostMapping("/login")
   public ResponseEntity<ApiResult<TokenResponse>> login(@RequestBody LoginRequest request) {
