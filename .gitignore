@@ -35,3 +35,27 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# --- Node / Vite 관련 ---
+node_modules/
+dist/
+.env
+.env.*
+
+# Vite cache
+.vite/
+
+# --- IntelliJ IDEA 관련 ---
+.idea/
+
+# --- OS별 캐시 등 ---
+.DS_Store
+Thumbs.db
+
+# --- 로그 ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- 기타 ---
+*.local
