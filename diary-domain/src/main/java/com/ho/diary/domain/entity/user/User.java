@@ -1,9 +1,9 @@
 package com.ho.diary.domain.entity.user;
 
+import com.ho.diary.domain.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class User extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,6 @@ public class User {
 
   @Column(nullable = false)
   private Boolean enabled = true;
-
-  @Column(name = "created_at", updatable = false)
-  private LocalDateTime createdAt = LocalDateTime.now();
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(
