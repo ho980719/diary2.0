@@ -8,13 +8,21 @@ import com.ho.diary.domain.entity.file.enums.FileReferenceType;
 import com.ho.diary.domain.repository.file.CommonFileRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class CommonFileService {
   private final CommonFileRepository commonFileRepository;
   private final FileManager fileManager;
+
+  @Transactional(readOnly = true)
+  public List<CommonFile> getFiles(Long refId, FileReferenceType refType) {
+    return commonFileRepository.findByReferenceIdAndReferenceType(refId, refType);
+  }
 
   public CommonFile uploadFile(MultipartFile file, Long refId, FileReferenceType refType) {
     String path = refType.name().toLowerCase();

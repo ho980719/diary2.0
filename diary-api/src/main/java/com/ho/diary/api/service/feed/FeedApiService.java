@@ -2,6 +2,7 @@ package com.ho.diary.api.service.feed;
 
 import com.ho.diary.api.controller.feed.dto.FeedRequestDto;
 import com.ho.diary.domain.dto.feed.FeedDto;
+import com.ho.diary.domain.dto.file.CommonFileDto;
 import com.ho.diary.domain.entity.feed.Feed;
 import com.ho.diary.domain.entity.file.enums.FileReferenceType;
 import com.ho.diary.domain.entity.user.User;
@@ -36,7 +37,11 @@ public class FeedApiService {
     if (!feed.getCreatedBy().equals(userId)) {
       feed.increaseViewCount();
     }
-    return FeedDto.of(feed);
+
+    List<CommonFileDto> images = commonFileService.getFiles(id, REFERENCE_TYPE)
+      .stream().map(CommonFileDto::from)
+      .toList();
+    return FeedDto.of(feed, images);
   }
 
   @Transactional
@@ -45,12 +50,14 @@ public class FeedApiService {
       feedRequestDto.getFiles()
         .forEach(x -> commonFileService.uploadFile(x, 0L, REFERENCE_TYPE));
     }
+
     User user = userService.getUser(userId);
-    /*feedService.createFeed(Feed.builder()
+
+    feedService.createFeed(Feed.builder()
       .user(user)
       .content(feedRequestDto.getContent())
       .build()
-    );*/
-    feedService.createFeed(new Feed(user, feedRequestDto.getContent()));
+    );
+//    feedService.createFeed(new Feed(user, feedRequestDto.getContent()));
   }
 }

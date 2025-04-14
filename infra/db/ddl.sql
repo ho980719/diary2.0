@@ -32,6 +32,7 @@ create table user_roles
 -- file
 CREATE TABLE common_file (
     id BIGSERIAL PRIMARY KEY,
+    file_key VARCHAR(50),
     origin_name VARCHAR(255),
     stored_name VARCHAR(255),
     file_path VARCHAR(512),
