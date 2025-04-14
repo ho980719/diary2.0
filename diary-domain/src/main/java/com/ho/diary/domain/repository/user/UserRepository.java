@@ -1,4 +1,4 @@
-package com.ho.diary.domain.repository;
+package com.ho.diary.domain.repository.user;
 
 import com.ho.diary.domain.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

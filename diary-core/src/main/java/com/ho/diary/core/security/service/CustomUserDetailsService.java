@@ -2,7 +2,7 @@ package com.ho.diary.core.security.service;
 
 import com.ho.diary.core.security.dto.UserPrincipal;
 import com.ho.diary.domain.entity.user.User;
-import com.ho.diary.domain.repository.UserRepository;
+import com.ho.diary.domain.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
