@@ -28,4 +28,10 @@ public class Feed extends BaseEntity {
   @Column(name = "image_urls", columnDefinition = "TEXT[]", nullable = false)
   @ElementCollection
   private List<String> imageUrls = new ArrayList<>();
+
+  private Long viewCount;
+
+  public void increaseViewCount() {
+    this.viewCount++;
+  }
 }

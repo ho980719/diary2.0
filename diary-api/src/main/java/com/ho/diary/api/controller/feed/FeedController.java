@@ -1,12 +1,13 @@
 package com.ho.diary.api.controller.feed;
 
+import com.ho.diary.api.controller.feed.dto.FeedRequestDto;
 import com.ho.diary.api.service.feed.FeedApiService;
+import com.ho.diary.auth.security.dto.UserPrincipal;
 import com.ho.diary.core.response.ApiResult;
 import com.ho.diary.domain.dto.feed.FeedDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +20,17 @@ public class FeedController {
   @GetMapping
   public ApiResult<List<FeedDto>> getFeeds() {
     return ApiResult.ok(feedApiService.getFeeds());
+  }
+
+  @GetMapping("/{id}")
+  public ApiResult<FeedDto> getFeed(@PathVariable(value = "id") Long id,
+    @AuthenticationPrincipal UserPrincipal user) {
+    return ApiResult.ok(feedApiService.getFeed(id, user.getId()));
+  }
+
+  @PostMapping
+  public ApiResult<Void> createFeed(@RequestBody FeedRequestDto feedDto) {
+    return ApiResult.ok();
   }
 }
 

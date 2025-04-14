@@ -35,6 +35,7 @@ CREATE TABLE feed_posts (
     user_id BIGINT NOT NULL,
     content TEXT,
     image_urls TEXT[] DEFAULT '{}',
+    view_count BIGINT DEFAULT 0,
 
     is_deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
