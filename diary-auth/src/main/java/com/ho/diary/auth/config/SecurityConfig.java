@@ -1,8 +1,8 @@
-package com.ho.diary.core.config;
+package com.ho.diary.auth.config;
 
-import com.ho.diary.core.security.exception.CustomAuthenticationEntryPoint;
-import com.ho.diary.core.security.filter.JwtAuthenticationFilter;
-import com.ho.diary.core.security.service.JwtTokenProvider;
+import com.ho.diary.auth.security.exception.CustomAuthenticationEntryPoint;
+import com.ho.diary.auth.security.filter.JwtAuthenticationFilter;
+import com.ho.diary.auth.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

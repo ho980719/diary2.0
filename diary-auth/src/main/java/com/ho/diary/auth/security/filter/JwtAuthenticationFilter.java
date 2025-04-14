@@ -1,7 +1,7 @@
-package com.ho.diary.core.security.filter;
+package com.ho.diary.auth.security.filter;
 
-import com.ho.diary.core.security.exception.CustomAuthenticationEntryPoint;
-import com.ho.diary.core.security.service.JwtTokenProvider;
+import com.ho.diary.auth.security.exception.CustomAuthenticationEntryPoint;
+import com.ho.diary.auth.security.jwt.JwtTokenProvider;
 import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

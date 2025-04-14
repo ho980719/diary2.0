@@ -1,4 +1,4 @@
-package com.ho.diary.core.security.service;
+package com.ho.diary.auth.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

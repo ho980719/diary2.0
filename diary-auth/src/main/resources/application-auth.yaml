@@ -1,0 +1,8 @@
+jwt:
+  secret: t8pWsvdK3P1YvnljZgNHFKLqQ2l9WZ3Um4UVFcYTfd8=
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd'T'HH:mm:ss

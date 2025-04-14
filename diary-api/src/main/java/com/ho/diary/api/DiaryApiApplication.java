@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication(scanBasePackages = {
   "com.ho.diary.api",
+  "com.ho.diary.auth",
   "com.ho.diary.core",
   "com.ho.diary.domain"
 })
@@ -20,3 +21,5 @@ public class DiaryApiApplication {
   }
 
 }
+
+

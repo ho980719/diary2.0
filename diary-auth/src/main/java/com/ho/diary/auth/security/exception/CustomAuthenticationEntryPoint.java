@@ -1,4 +1,4 @@
-package com.ho.diary.core.security.exception;
+package com.ho.diary.auth.security.exception;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ho.diary.core.exception.dto.ErrorResponse;

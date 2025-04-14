@@ -1,6 +1,6 @@
-package com.ho.diary.core.security.service;
+package com.ho.diary.auth.security.service;
 
-import com.ho.diary.core.security.dto.UserPrincipal;
+import com.ho.diary.auth.security.dto.UserPrincipal;
 import com.ho.diary.domain.entity.user.User;
 import com.ho.diary.domain.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;

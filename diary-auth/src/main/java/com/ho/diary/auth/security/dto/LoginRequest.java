@@ -1,4 +1,4 @@
-package com.ho.diary.core.security.dto;
+package com.ho.diary.auth.security.dto;
 
 import lombok.Getter;
 import lombok.Setter;

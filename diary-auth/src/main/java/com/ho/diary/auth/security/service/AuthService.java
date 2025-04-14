@@ -1,9 +1,10 @@
-package com.ho.diary.core.security.service;
+package com.ho.diary.auth.security.service;
 
+import com.ho.diary.auth.security.jwt.JwtTokenProvider;
 import com.ho.diary.core.exception.BusinessException;
 import com.ho.diary.core.exception.enums.ErrorCode;
-import com.ho.diary.core.security.dto.LoginRequest;
-import com.ho.diary.core.security.dto.TokenResponse;
+import com.ho.diary.auth.security.dto.LoginRequest;
+import com.ho.diary.auth.security.dto.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;

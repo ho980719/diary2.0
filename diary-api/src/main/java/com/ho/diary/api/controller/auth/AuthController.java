@@ -1,9 +1,9 @@
 package com.ho.diary.api.controller.auth;
 
+import com.ho.diary.auth.security.dto.LoginRequest;
+import com.ho.diary.auth.security.dto.TokenResponse;
+import com.ho.diary.auth.security.service.AuthService;
 import com.ho.diary.core.response.ApiResult;
-import com.ho.diary.core.security.dto.LoginRequest;
-import com.ho.diary.core.security.dto.TokenResponse;
-import com.ho.diary.core.security.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
