@@ -4,10 +4,12 @@ import com.ho.diary.domain.entity.feed.Feed;
 import com.ho.diary.domain.entity.user.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 public class FeedDto {
   private Long id;
   private String content;
