@@ -7,7 +7,7 @@ create table users
     email varchar(100) unique,
     enabled    boolean   default true,
 
-    is_deleted BOOLEAN DEFAULT FALSE,
+    deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by BIGINT,
@@ -29,6 +29,22 @@ create table user_roles
 );
 -- user end
 
+-- file
+CREATE TABLE common_file (
+    id BIGSERIAL PRIMARY KEY,
+    origin_name VARCHAR(255),
+    stored_name VARCHAR(255),
+    file_path VARCHAR(512),
+    file_size BIGINT,
+    content_type VARCHAR(100),
+    reference_id BIGINT NOT NULL,
+    reference_type VARCHAR(10) NOT NULL,
+    deleted BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- file end
+
 -- feed
 CREATE TABLE feed_posts (
     id SERIAL PRIMARY KEY,
@@ -37,7 +53,7 @@ CREATE TABLE feed_posts (
     image_urls TEXT[] DEFAULT '{}',
     view_count BIGINT DEFAULT 0,
 
-    is_deleted BOOLEAN DEFAULT FALSE,
+    deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by BIGINT,
@@ -49,7 +65,7 @@ CREATE TABLE post_likes (
     user_id BIGINT NOT NULL,
     post_id INT NOT NULL,
 
-    is_deleted BOOLEAN DEFAULT FALSE,
+    deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by BIGINT,
@@ -64,7 +80,7 @@ CREATE TABLE post_comments (
     user_id BIGINT NOT NULL,
     content TEXT NOT NULL,
 
-    is_deleted BOOLEAN DEFAULT FALSE,
+    deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by BIGINT,
@@ -75,7 +91,7 @@ CREATE TABLE hashtags (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
 
-    is_deleted BOOLEAN DEFAULT FALSE,
+    deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by BIGINT,
@@ -86,7 +102,7 @@ CREATE TABLE post_hashtags (
     post_id INT NOT NULL,
     hashtag_id INT NOT NULL,
 
-    is_deleted BOOLEAN DEFAULT FALSE,
+    deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_by BIGINT,

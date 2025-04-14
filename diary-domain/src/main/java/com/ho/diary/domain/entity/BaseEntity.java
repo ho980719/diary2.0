@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
-  @Column(name = "is_deleted", nullable = false)
-  protected Boolean isDeleted = false;
+  @Column(name = "deleted", nullable = false)
+  protected Boolean deleted = false;
 
   @CreatedDate
   @Column(name = "created_at", nullable = false, updatable = false)
