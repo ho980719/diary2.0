@@ -1,31 +1,56 @@
 package com.ho.diary.api.service.feed;
 
+import com.ho.diary.api.controller.feed.dto.FeedRequestDto;
 import com.ho.diary.domain.dto.feed.FeedDto;
 import com.ho.diary.domain.entity.feed.Feed;
+import com.ho.diary.domain.entity.file.enums.FileReferenceType;
+import com.ho.diary.domain.entity.user.User;
 import com.ho.diary.domain.service.feed.FeedService;
-import jakarta.transaction.Transactional;
+import com.ho.diary.domain.service.file.CommonFileService;
+import com.ho.diary.domain.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class FeedApiService {
-  private final FeedService feedService;
+  private final static FileReferenceType REFERENCE_TYPE = FileReferenceType.FEED;
 
+  private final FeedService feedService;
+  private final CommonFileService commonFileService;
+  private final UserService userService;
+
+  @Transactional(readOnly = true)
   public List<FeedDto> getFeeds() {
     return feedService.getFeeds()
       .stream().map(FeedDto::of)
       .toList();
   }
 
+  @Transactional(readOnly = true)
   public FeedDto getFeed(Long id, Long userId) {
     Feed feed = feedService.getFeed(id);
     if (!feed.getCreatedBy().equals(userId)) {
       feed.increaseViewCount();
     }
     return FeedDto.of(feed);
+  }
+
+  @Transactional
+  public void createFeed(FeedRequestDto feedRequestDto, Long userId) {
+    if (!feedRequestDto.getFiles().isEmpty()) {
+      feedRequestDto.getFiles()
+        .forEach(x -> commonFileService.uploadFile(x, 0L, REFERENCE_TYPE));
+    }
+    User user = userService.getUser(userId);
+    /*feedService.createFeed(Feed.builder()
+      .user(user)
+      .content(feedRequestDto.getContent())
+      .build()
+    );*/
+    feedService.createFeed(new Feed(user, feedRequestDto.getContent()));
   }
 }

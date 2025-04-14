@@ -22,4 +22,8 @@ public class FeedService {
     return feedRepository.findById(id)
       .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND));
   }
+
+  public void createFeed(Feed feed) {
+    feedRepository.save(feed);
+  }
 }

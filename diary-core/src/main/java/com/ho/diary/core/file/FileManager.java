@@ -20,16 +20,6 @@ public class FileManager {
     return prefix + "_" + UUID.randomUUID().toString().replace("-", "");
   }
 
-  public String save(MultipartFile multipartFile, String fileKey) throws IOException {
-    File file = new File(uploadDir + File.separator + fileKey);
-    file.getParentFile().mkdirs();
-
-    multipartFile.transferTo(file);
-    log.info("Saved file: {}", file.getAbsolutePath());
-
-    return fileKey;
-  }
-
   public String save(MultipartFile multipartFile, String fileKey, String path) throws IOException {
     if (path == null || path.isEmpty()) {
       path = "temp";

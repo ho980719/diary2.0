@@ -5,6 +5,7 @@ import com.ho.diary.api.service.feed.FeedApiService;
 import com.ho.diary.auth.security.dto.UserPrincipal;
 import com.ho.diary.core.response.ApiResult;
 import com.ho.diary.domain.dto.feed.FeedDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,9 @@ public class FeedController {
   }
 
   @PostMapping
-  public ApiResult<Void> createFeed(@RequestBody FeedRequestDto feedDto) {
+  public ApiResult<Void> createFeed(@RequestBody @Valid FeedRequestDto feedRequestDto,
+    @AuthenticationPrincipal UserPrincipal user) {
+    feedApiService.createFeed(feedRequestDto, user.getId());
     return ApiResult.ok();
   }
 }
