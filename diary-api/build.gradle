@@ -6,6 +6,7 @@ dependencies {
     implementation project(':diary-core')
     implementation project(':diary-domain')
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.postgresql:postgresql:42.7.3'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }

@@ -13,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
+  private final UserDetailsService userDetailsService;
 
   @Value("${jwt.secret}")
   private String secret;
@@ -53,7 +56,8 @@ public class JwtTokenProvider {
 
   public Authentication getAuthentication(String token) {
     String username = getUsername(token);
-    return new UsernamePasswordAuthenticationToken(username, "", getRoles(token));
+    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+    return new UsernamePasswordAuthenticationToken(userDetails, "", getRoles(token));
   }
 
   public String getUsername(String token) {
