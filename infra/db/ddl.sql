@@ -50,7 +50,6 @@ CREATE TABLE feed_posts (
     id SERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
     content TEXT,
-    image_urls TEXT[] DEFAULT '{}',
     view_count BIGINT DEFAULT 0,
 
     deleted BOOLEAN DEFAULT FALSE,
