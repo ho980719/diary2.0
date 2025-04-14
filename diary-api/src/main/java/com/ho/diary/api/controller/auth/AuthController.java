@@ -1,12 +1,10 @@
 package com.ho.diary.api.controller.auth;
 
-import com.ho.diary.core.response.ApiResponse;
 import com.ho.diary.core.response.ApiResult;
 import com.ho.diary.core.security.dto.LoginRequest;
 import com.ho.diary.core.security.dto.TokenResponse;
 import com.ho.diary.core.security.service.AuthService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -25,7 +23,7 @@ public class AuthController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<ApiResult<TokenResponse>> login(@RequestBody LoginRequest request) {
-    return ApiResponse.ok(authService.login(request));
+  public ApiResult<TokenResponse> login(@RequestBody LoginRequest request) {
+    return ApiResult.ok(authService.login(request));
   }
 }
