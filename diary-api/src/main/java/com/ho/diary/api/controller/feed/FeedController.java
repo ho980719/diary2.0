@@ -1,8 +1,10 @@
 package com.ho.diary.api.controller.feed;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.ho.diary.api.controller.feed.dto.FeedRequestDto;
 import com.ho.diary.api.service.feed.FeedApiService;
 import com.ho.diary.auth.security.dto.UserPrincipal;
+import com.ho.diary.core.common.json.Views;
 import com.ho.diary.core.response.ApiResult;
 import com.ho.diary.domain.dto.feed.FeedDto;
 import jakarta.validation.Valid;
@@ -19,11 +21,13 @@ public class FeedController {
   private final FeedApiService feedApiService;
 
   @GetMapping
+  @JsonView(Views.List.class)
   public ApiResult<List<FeedDto>> getFeeds() {
     return ApiResult.ok(feedApiService.getFeeds());
   }
 
   @GetMapping("/{id}")
+  @JsonView(Views.View.class)
   public ApiResult<FeedDto> getFeed(@PathVariable(value = "id") Long id,
     @AuthenticationPrincipal UserPrincipal user) {
     return ApiResult.ok(feedApiService.getFeed(id, user.getId()));

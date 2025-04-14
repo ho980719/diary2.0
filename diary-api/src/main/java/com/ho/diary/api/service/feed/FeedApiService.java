@@ -27,7 +27,12 @@ public class FeedApiService {
   @Transactional(readOnly = true)
   public List<FeedDto> getFeeds() {
     return feedService.getFeeds()
-      .stream().map(FeedDto::of)
+      .stream().map(x -> {
+        List<CommonFileDto> images = commonFileService.getFiles(x.getId(), REFERENCE_TYPE)
+          .stream().map(CommonFileDto::from)
+          .toList();
+        return FeedDto.of(x, images);
+      })
       .toList();
   }
 

@@ -1,5 +1,7 @@
 package com.ho.diary.domain.dto.feed;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.ho.diary.core.common.json.Views;
 import com.ho.diary.domain.dto.file.CommonFileDto;
 import com.ho.diary.domain.entity.feed.Feed;
 import com.ho.diary.domain.entity.user.User;
@@ -15,14 +17,20 @@ import java.util.List;
 @Getter
 @Setter
 public class FeedDto {
+  @JsonView(Views.List.class)
   private Long id;
+  @JsonView(Views.List.class)
   private String content;
 
+  @JsonView(Views.List.class)
   private String userName;
+  @JsonView(Views.View.class)
   private Long createdBy;
+  @JsonView(Views.List.class)
   private LocalDateTime createdAt;
+  @JsonView(Views.List.class)
   private int linkCount;
-
+  @JsonView(Views.List.class)
   private List<CommonFileDto> images = new ArrayList<>();
 
   @Builder
