@@ -15,15 +15,18 @@ public class FeedService {
   private final FeedRepository feedRepository;
 
   public List<Feed> getFeeds() {
-    return feedRepository.findAll();
+    return feedRepository.findAll().stream()
+      .filter(x -> !x.getDeleted())
+      .toList();
   }
 
   public Feed getFeed(Long id) {
     return feedRepository.findById(id)
+      .filter(x -> !x.getDeleted())
       .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND));
   }
 
-  public void createFeed(Feed feed) {
-    feedRepository.save(feed);
+  public Feed createFeed(Feed feed) {
+    return feedRepository.save(feed);
   }
 }

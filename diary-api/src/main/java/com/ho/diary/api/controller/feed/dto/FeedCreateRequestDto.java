@@ -10,8 +10,8 @@ import java.util.List;
 
 @Getter
 @Setter
-public class FeedRequestDto {
+public class FeedCreateRequestDto {
   @NotNull(message = "내용을 입력해주세요.")
   private String content;
-  List<MultipartFile> files = new ArrayList<>();
+  List<MultipartFile> images = new ArrayList<>();
 }
