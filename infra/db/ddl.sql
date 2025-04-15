@@ -10,6 +10,7 @@ create table users
     deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP,
     created_by BIGINT,
     updated_by BIGINT,
     deleted_by BIGINT
@@ -42,7 +43,8 @@ CREATE TABLE common_file (
     reference_type VARCHAR(10) NOT NULL,
     deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP
 );
 -- file end
 
@@ -56,6 +58,7 @@ CREATE TABLE feed_posts (
     deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP ,
     created_by BIGINT,
     updated_by BIGINT,
     deleted_by BIGINT
@@ -68,6 +71,7 @@ CREATE TABLE post_likes (
     deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP ,
     created_by BIGINT,
     updated_by BIGINT,
     deleted_by BIGINT,
@@ -83,6 +87,7 @@ CREATE TABLE post_comments (
     deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP ,
     created_by BIGINT,
     updated_by BIGINT,
     deleted_by BIGINT
@@ -94,6 +99,7 @@ CREATE TABLE hashtags (
     deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP ,
     created_by BIGINT,
     updated_by BIGINT,
     deleted_by BIGINT
@@ -105,6 +111,7 @@ CREATE TABLE post_hashtags (
     deleted BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP ,
     created_by BIGINT,
     updated_by BIGINT,
     deleted_by BIGINT,
