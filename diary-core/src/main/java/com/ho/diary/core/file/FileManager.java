@@ -1,5 +1,6 @@
 package com.ho.diary.core.file;
 
+import com.ho.diary.core.file.dto.FileDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -20,7 +21,7 @@ public class FileManager {
     return prefix + "_" + UUID.randomUUID().toString().replace("-", "");
   }
 
-  public String save(MultipartFile multipartFile, String fileKey, String path) throws IOException {
+  public FileDto save(MultipartFile multipartFile, String fileKey, String path) throws IOException {
     if (path == null || path.isEmpty()) {
       path = "temp";
     }
@@ -33,8 +34,8 @@ public class FileManager {
 
     multipartFile.transferTo(file);
     log.info("Saved file: {}", file.getAbsolutePath());
-
-    return fileKey;
+    return new FileDto(fileKey, file.getAbsolutePath(), multipartFile.getOriginalFilename(), file.getName(),
+      multipartFile.getSize(), multipartFile.getContentType());
   }
 
   public void delete(String storedName) {

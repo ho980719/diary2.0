@@ -1,9 +1,9 @@
 package com.ho.diary.domain.entity.file;
 
+import com.ho.diary.core.file.dto.FileDto;
 import com.ho.diary.domain.entity.file.enums.FileReferenceType;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -75,14 +75,15 @@ public class CommonFile {
     return (lastIndex != -1) ? filename.substring(lastIndex + 1) : null;
   }
 
-  public static CommonFile of(MultipartFile file, Long refId, FileReferenceType type) {
-    String storedFilename = type.name().toLowerCase() + "_" + UUID.randomUUID().toString().replace("-", "");
-
+  public static CommonFile of(FileDto file, Long refId, FileReferenceType type) {
+//    String storedFilename = type.name().toLowerCase() + "_" + UUID.randomUUID().toString().replace("-", "");
     return CommonFile.builder()
-      .originName(file.getOriginalFilename())
-      .storedName(storedFilename)
-      .fileSize(file.getSize())
-      .contentType(file.getContentType())
+      .fileKey(file.fileKey())
+      .filePath(file.path())
+      .originName(file.originName())
+      .storedName(file.storedName())
+      .fileSize(file.fileSize())
+      .contentType(file.contentType())
       .referenceId(refId)
       .referenceType(type)
       .build();
