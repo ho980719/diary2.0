@@ -34,8 +34,8 @@ class ExceptionHandlingIntegrationTest {
   @Test
   void globalExceptionTest() throws Exception {
     mockMvc.perform(get("/api/test-exception"))
-      .andExpect(status().isBadRequest())
-      .andExpect(jsonPath("$.code", is("INVALID_INPUT_VALUE")))
-      .andExpect(jsonPath("$.message", is("잘못된 입력입니다.")));
+      .andExpect(status().isUnauthorized())
+      .andExpect(jsonPath("$.code", is("UNAUTHORIZED")))
+      .andExpect(jsonPath("$.message", is("토큰 인증이 필요합니다.")));
   }
 }

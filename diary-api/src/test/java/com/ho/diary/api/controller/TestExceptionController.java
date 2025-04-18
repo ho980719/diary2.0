@@ -10,6 +10,6 @@ public class TestExceptionController {
 
   @GetMapping("/api/test-exception")
   public String throwBusinessException() {
-    throw new BusinessException(ErrorCode.INVALID_INPUT_VALUE);
+    throw new BusinessException(ErrorCode.INVALID_JWT);
   }
 }
