@@ -1,6 +1,5 @@
-.gradle/
-.git/
+.git
+.gradle
 build/
-src/test/
-*.md
+node_modules/
 *.log
