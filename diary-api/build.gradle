@@ -1,5 +1,19 @@
+def archiveName = project.name
+def archiveVer = hasProperty('archiveVer') ? "$archiveVer" : '1.0.0'
+
 bootJar.enabled = true
 jar.enabled = false
+
+println "----------- archiveName: $archiveName , archiveVer: $archiveVer -----------"
+
+bootJar {
+    archiveBaseName = "$archiveName"
+    archiveVersion = "$archiveVer"
+    mainClass = 'com.ho.diary.api.DiaryApiApplication'
+    manifest {
+        attributes('Implementation-Title': "$archiveName", 'Implementation-Version': "$archiveVer")
+    }
+}
 
 dependencies {
     implementation project(':diary-auth')
@@ -9,9 +23,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.postgresql:postgresql:42.7.3'
+    testImplementation 'com.h2database:h2'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+springBoot {
+    mainClass = 'com.ho.diary.api.DiaryApiApplication'
 }

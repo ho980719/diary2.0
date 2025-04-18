@@ -14,6 +14,10 @@ java {
     }
 }
 
+repositories {
+    mavenCentral()  // Maven Central 저장소를 설정
+}
+
 subprojects {
     // subprojects 블록 안에서는 plugins 블록을 사용할 수 없어, 플러그인 등록을 위해서는 apply plugin 을 사용해야한다.
     apply plugin: 'java'

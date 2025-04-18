@@ -8,7 +8,7 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/diary
+    url: jdbc:postgresql://db:5432/diary
     username: ho980719
     password: rlawnsgh12!
 

@@ -1,0 +1,35 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: diary-api/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+
+#  diary-front:
+#    build:
+#      context: ./diary-front
+#      dockerfile: diary-front/Dockerfile
+#    ports:
+#      - "3000:80"
+
+  db:
+    container_name: diary-db
+    image: diary-db
+    restart: always
+    environment:
+      POSTGRES_DB: diary
+      POSTGRES_USER: ho980719
+      POSTGRES_PASSWORD: rlawnsgh12!
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    external: true
