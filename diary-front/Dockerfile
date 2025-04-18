@@ -2,7 +2,9 @@
 FROM node:20 AS builder
 
 WORKDIR /app
-COPY . .
+
+COPY diary-front/ ./
+
 RUN npm ci && npm run build
 
 # 2단계: 정적 서빙

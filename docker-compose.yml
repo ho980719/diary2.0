@@ -9,17 +9,19 @@ services:
       - db
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+    volumes:
+      - /c/upload:/upload
 
-#  diary-front:
-#    build:
-#      context: ./diary-front
-#      dockerfile: diary-front/Dockerfile
-#    ports:
-#      - "3000:80"
+  front:
+    build:
+      context: .
+      dockerfile: diary-front/Dockerfile
+    ports:
+      - "3000:80"
 
   db:
     container_name: diary-db
-    image: diary-db
+    image: postgres:latest
     restart: always
     environment:
       POSTGRES_DB: diary
@@ -32,4 +34,3 @@ services:
 
 volumes:
   pgdata:
-    external: true
