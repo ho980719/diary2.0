@@ -1,4 +1,7 @@
 {
+  "compilerOptions": {
+    "jsx": "react-jsx", // 또는 "react-jsxdev" (개발용)
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
