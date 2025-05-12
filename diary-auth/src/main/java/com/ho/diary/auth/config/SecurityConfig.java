@@ -35,16 +35,17 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.csrf(AbstractHttpConfigurer::disable)
       .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-      .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/v1/auth/login").permitAll()
-        .anyRequest().authenticated()
+      .authorizeHttpRequests(
+        auth -> auth.requestMatchers(
+          "/api/v1/auth/login", "/test/*").permitAll()
+          .anyRequest().authenticated()
       )
-      .exceptionHandling(ex -> ex
-        .accessDeniedHandler(customAccessDeniedHandler)
-        .authenticationEntryPoint(customAuthenticationEntryPoint)
+      .exceptionHandling(
+        ex -> ex.accessDeniedHandler(customAccessDeniedHandler)
+          .authenticationEntryPoint(customAuthenticationEntryPoint)
       )
-      .addFilterAfter(new JwtAuthenticationFilter(jwtTokenProvider, customAuthenticationEntryPoint), UsernamePasswordAuthenticationFilter.class)
-    ;
+      .addFilterAfter(new JwtAuthenticationFilter(jwtTokenProvider, customAuthenticationEntryPoint),
+        UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }
