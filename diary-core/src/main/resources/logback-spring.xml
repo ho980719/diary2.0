@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-
+    <springProperty scope="context" name="profile" source="spring.profiles.active"/>
+    <springProperty name="moduleName" source="spring.application.name"/>
     <!-- 로그 레벨 설정 -->
     <property name="LOG_LEVEL" value="INFO"/>
 
     <!-- Logstash에 로그를 전송할 설정 -->
-    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>127.0.0.1:5000</destination> <!-- Docker Compose에서 설정한 Logstash 서비스 이름 -->
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <customFields>
-                <field name="app_name" value="your-app-name"/>
-            </customFields>
-        </encoder>
-    </appender>
+    <springProfile name="local">
+        <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>127.0.0.1:5000</destination> <!-- Docker Compose에서 설정한 Logstash 서비스 이름 -->
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <customFields>{"app":"${moduleName}", "profile":"${profile}"}</customFields>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <springProfile name="dev">
+        <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>diary-logstash:5000</destination>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <customFields>{"app":"${moduleName}", "profile":"${profile}"}</customFields>
+            </encoder>
+        </appender>
+    </springProfile>
 
     <!-- 콘솔 출력 설정 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
