@@ -1,0 +1,44 @@
+def archiveName = project.name
+def archiveVer = hasProperty('archiveVer') ? "$archiveVer" : '1.0.0'
+
+bootJar.enabled = true
+jar.enabled = false
+
+println "----------- archiveName: $archiveName , archiveVer: $archiveVer -----------"
+
+ext {
+    set('springCloudVersion', "2024.0.1")
+}
+
+bootJar {
+    archiveBaseName = "$archiveName"
+    archiveVersion = "$archiveVer"
+    mainClass = 'com.ho.diary.search.DiarySearchApplication'
+    manifest {
+        attributes('Implementation-Title': "$archiveName", 'Implementation-Version': "$archiveVer")
+    }
+}
+
+dependencies {
+    implementation project(':diary-core')
+    implementation project(':diary-domain')
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.postgresql:postgresql:42.7.3'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+springBoot {
+    mainClass = 'com.ho.diary.search.DiarySearchApplication'
+}
