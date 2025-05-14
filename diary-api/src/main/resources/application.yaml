@@ -1,3 +1,5 @@
 spring:
+  application:
+    name: search
   profiles:
     active: local

@@ -11,6 +11,8 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     volumes:
       - /c/upload:/upload
+    networks:
+      - diary-net
 
   front:
     build:
@@ -18,6 +20,8 @@ services:
       dockerfile: diary-front/Dockerfile
     ports:
       - "3000:80"
+    networks:
+      - diary-net
 
   db:
     container_name: diary-db
@@ -31,6 +35,12 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - diary-net
 
 volumes:
   pgdata:
+
+networks:
+  diary-net:
+    external: true
