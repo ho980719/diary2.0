@@ -22,6 +22,10 @@ spring:
       enabled: true
       path: /h2-console
 
+  data:
+    redis:
+      url: redis://:rlawnsgh12!@localhost:6379
+
 logging:
   level:
     root: INFO
