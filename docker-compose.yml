@@ -38,8 +38,19 @@ services:
     networks:
       - diary-net
 
+  redis:
+    container_name: diary-redis
+    image: redis:7.0-alpine
+    command: ["redis-server", "--requirepass", "rlawnsgh12!"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
 volumes:
   pgdata:
+  redis-data:
 
 networks:
   diary-net:

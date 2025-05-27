@@ -17,6 +17,7 @@ public enum ErrorCode {
   INVALID_JWT("UNAUTHORIZED", "토큰 인증이 필요합니다.", HttpStatus.UNAUTHORIZED),
   INVALID_USERNAME_PASSWORD("INVALID_USERNAME_PASSWORD", "아이디/비밀번호를 확인해주세요.", HttpStatus.UNAUTHORIZED),
   FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "파일 업로드시 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+  MESSAGE_SEND_ERROR("MESSAGE_SEND_ERROR", "메세지 전송중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
   ;
 
   private final String code;

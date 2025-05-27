@@ -28,7 +28,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   @Override
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
     throws ServletException, IOException {
+    
+    // @todo: 로그인 필수
+    if (request.getRequestURI().startsWith("/ws-chat")) {
+      chain.doFilter(request, response);
+      return;
+    }
+
     try {
+
       String token = resolveToken(request);
 
       if (token != null && jwtTokenProvider.validateToken(token)) {
