@@ -1,4 +1,4 @@
-package com.ho.diary.api.config;
+package com.ho.diary.api.config.redis;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

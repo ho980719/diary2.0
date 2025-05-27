@@ -1,4 +1,4 @@
-package com.ho.diary.api.config;
+package com.ho.diary.api.config.redis;
 
 import com.ho.diary.api.redis.RedisChatSubscriber;
 import org.springframework.context.annotation.Bean;

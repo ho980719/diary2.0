@@ -5,6 +5,8 @@ import { Container } from "@mui/material";
 import Box from "@mui/material/Box";
 import SignIn from "./pages/users/SignIn.tsx";
 import SignUp from "./pages/users/SignUp.tsx";
+import ChatRooms from "./pages/chat/ChatRooms.tsx";
+import ChatRoom from "./pages/chat/ChatRoom.tsx";
 
 function App() {
   return (
@@ -17,6 +19,10 @@ function App() {
             <Route path="users">
               <Route path="sign-in" element={<SignIn />} />
               <Route path="sign-up" element={<SignUp />} />
+            </Route>
+            <Route path="chat">
+              <Route path="rooms" element={<ChatRooms />} />
+              <Route path="room" element={<ChatRoom username="5" roomId="1" />} />
             </Route>
           </Routes>
         </Container>
