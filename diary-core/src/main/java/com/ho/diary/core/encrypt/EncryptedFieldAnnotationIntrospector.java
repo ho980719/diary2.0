@@ -14,7 +14,8 @@ public class EncryptedFieldAnnotationIntrospector extends JacksonAnnotationIntro
 
   @Override
   public Object findSerializer(Annotated a) {
-    if (a.hasAnnotation(EncryptedField.class)) {
+    EncryptedField annotation = a.getAnnotation(EncryptedField.class);
+    if (annotation != null && annotation.decrypt()) {
       return new EncryptedFieldSerializer(encryptor);
     }
     return null;
