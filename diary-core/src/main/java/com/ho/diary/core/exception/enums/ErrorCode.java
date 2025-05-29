@@ -18,6 +18,9 @@ public enum ErrorCode {
   INVALID_USERNAME_PASSWORD("INVALID_USERNAME_PASSWORD", "아이디/비밀번호를 확인해주세요.", HttpStatus.UNAUTHORIZED),
   FILE_UPLOAD_ERROR("FILE_UPLOAD_ERROR", "파일 업로드시 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
   MESSAGE_SEND_ERROR("MESSAGE_SEND_ERROR", "메세지 전송중 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+  DUPLICATE_USERNAME("DUPLICATE_USERNAME", "이미 존재하는 사용자명입니다.", HttpStatus.CONFLICT),
+  DUPLICATE_EMAIL("DUPLICATE_EMAIL", "이미 존재하는 이메일입니다.", HttpStatus.CONFLICT),
+  DISABLED_USER("DISABLED_USER", "비활성화된 회원입니다.", HttpStatus.FORBIDDEN),
   ;
 
   private final String code;

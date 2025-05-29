@@ -2,7 +2,10 @@ package com.ho.diary.domain.entity.user;
 
 import com.ho.diary.domain.entity.user.enums.RoleType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "roles")
@@ -16,6 +19,7 @@ public class Role {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, unique = true)
-  private RoleType name;
+  @Column(nullable = false, unique = true, name = "name")
+  @Enumerated(EnumType.STRING)
+  private RoleType roleType;
 }

@@ -39,7 +39,10 @@ public class SecurityConfig {
       .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(
         auth -> auth.requestMatchers(
-          "/api/v1/auth/login", "/test/**", "/ws-chat/**").permitAll()
+          "/api/v1/auth/**",
+          "/test/**",
+          "/ws-chat/**")
+          .permitAll()
           .anyRequest().authenticated()
       )
       .exceptionHandling(

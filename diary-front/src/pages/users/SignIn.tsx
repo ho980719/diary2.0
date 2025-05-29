@@ -9,7 +9,6 @@ export default function SignIn() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: 로그인 처리
     console.log({ email, password });
   };
 

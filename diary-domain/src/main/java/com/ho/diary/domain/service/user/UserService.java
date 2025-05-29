@@ -13,7 +13,29 @@ public class UserService {
   private final UserRepository userRepository;
 
   public User getUser(Long id) {
-    return userRepository.findById(id)
+    User user = userRepository.findById(id)
       .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND));
+
+    if (Boolean.TRUE.equals(user.getDeleted())) {
+      throw new BusinessException(ErrorCode.RESOURCE_NOT_FOUND);
+    }
+
+    if (Boolean.FALSE.equals(user.getEnabled())) {
+      throw new BusinessException(ErrorCode.DISABLED_USER);
+    }
+
+    return user;
+  }
+
+  public boolean duplicateUsername(String username) {
+    return userRepository.existsUserByUsername(username);
+  }
+
+  public boolean duplicateEmail(String email) {
+    return userRepository.existsUserByEmail(email);
+  }
+
+  public User createUser(User user) {
+    return userRepository.save(user);
   }
 }

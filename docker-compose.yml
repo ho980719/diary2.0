@@ -54,4 +54,3 @@ volumes:
 
 networks:
   diary-net:
-    external: true

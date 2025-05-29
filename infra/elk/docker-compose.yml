@@ -40,5 +40,6 @@ services:
       - diary-net
 
 networks:
-  diary-net:
+  diary-net:      
     external: true
+    name: diary_diary-net  # Docker 네트워크 이름
