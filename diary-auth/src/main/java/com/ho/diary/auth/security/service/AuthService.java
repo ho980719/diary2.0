@@ -1,10 +1,10 @@
 package com.ho.diary.auth.security.service;
 
+import com.ho.diary.auth.security.dto.LoginRequest;
+import com.ho.diary.auth.security.dto.TokenResponse;
 import com.ho.diary.auth.security.jwt.JwtTokenProvider;
 import com.ho.diary.core.exception.BusinessException;
 import com.ho.diary.core.exception.enums.ErrorCode;
-import com.ho.diary.auth.security.dto.LoginRequest;
-import com.ho.diary.auth.security.dto.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -39,7 +39,6 @@ public class AuthService {
       return new TokenResponse(token);
 
     } catch (BadCredentialsException e) {
-      // 🔥 여기서 커스텀 예외로 감싸서 던져줌
       throw new BusinessException(ErrorCode.INVALID_USERNAME_PASSWORD);
     }
   }

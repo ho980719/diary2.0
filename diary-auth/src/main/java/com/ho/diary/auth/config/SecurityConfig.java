@@ -3,11 +3,13 @@ package com.ho.diary.auth.config;
 import com.ho.diary.auth.security.exception.CustomAuthenticationEntryPoint;
 import com.ho.diary.auth.security.filter.JwtAuthenticationFilter;
 import com.ho.diary.auth.security.jwt.JwtTokenProvider;
+import com.ho.diary.auth.security.service.CustomAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,13 +25,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
   private final JwtTokenProvider jwtTokenProvider;
+  private final CustomAuthenticationProvider customAuthenticationProvider;
   private final AuthenticationConfiguration authenticationConfiguration;
   private final AccessDeniedHandler customAccessDeniedHandler;
   private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
   @Bean
-  public AuthenticationManager authenticationManager() throws Exception {
-    return authenticationConfiguration.getAuthenticationManager();
+  public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+    return http.getSharedObject(AuthenticationManagerBuilder.class)
+      .authenticationProvider(customAuthenticationProvider)
+      .build();
   }
 
   @Bean

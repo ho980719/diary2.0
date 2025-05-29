@@ -1,2 +1,5 @@
 file:
   upload-dir: C:/upload
+
+aes:
+  secret-key: rlawnsgh12!
