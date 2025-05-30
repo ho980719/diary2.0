@@ -57,7 +57,8 @@ public class Feed extends BaseEntity {
     this.hashtags = hashtags;
   }
 
-  public void update(String content) {
+  public void update(String content, Set<Hashtag> hashtags) {
     this.content = content;
+    this.hashtags = new HashSet<>(hashtags);
   }
 }

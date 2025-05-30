@@ -2,10 +2,12 @@ package com.ho.diary.domain.entity.feed;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Table(name = "hashtags")
 @Entity
 @Getter
+@NoArgsConstructor
 public class Hashtag {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

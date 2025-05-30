@@ -72,6 +72,7 @@ CREATE TABLE feed_posts (
     updated_by BIGINT,
     deleted_by BIGINT
 );
+
 CREATE TABLE post_likes (
     id SERIAL PRIMARY KEY,
     user_id BIGINT NOT NULL,
@@ -87,6 +88,7 @@ CREATE TABLE post_likes (
 
     UNIQUE(user_id, post_id)
 );
+
 CREATE TABLE post_comments (
     id SERIAL PRIMARY KEY,
     post_id INT NOT NULL,
@@ -101,30 +103,15 @@ CREATE TABLE post_comments (
     updated_by BIGINT,
     deleted_by BIGINT
 );
+
 CREATE TABLE hashtags (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE,
-
-    deleted BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP ,
-    created_by BIGINT,
-    updated_by BIGINT,
-    deleted_by BIGINT
+    name VARCHAR(100) NOT NULL UNIQUE
 );
+
 CREATE TABLE post_hashtags (
     post_id INT NOT NULL,
     hashtag_id INT NOT NULL,
-
-    deleted BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP ,
-    created_by BIGINT,
-    updated_by BIGINT,
-    deleted_by BIGINT,
-
     PRIMARY KEY (post_id, hashtag_id)
 );
 -- feed End

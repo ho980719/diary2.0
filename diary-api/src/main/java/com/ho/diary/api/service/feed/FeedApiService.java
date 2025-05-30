@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -88,12 +89,16 @@ public class FeedApiService {
       .collect(Collectors.toSet());
 
     // 3. 없는 hashtag save
-    List<Hashtag> toCreate = requestHashtags.stream()
-      .filter(name -> !existingNames.contains(name))
-      .distinct()
-      .map(Hashtag::new)
-      .toList();
-    List<Hashtag> newHashtags = hashtagService.saveAll(toCreate);
+    List<Hashtag> newHashtags = new ArrayList<>();
+    if (requestHashtags != null && !requestHashtags.isEmpty()) {
+      List<Hashtag> toCreate = requestHashtags.stream()
+        .filter(name -> !existingNames.contains(name))
+        .distinct()
+        .map(Hashtag::new)
+        .toList();
+
+      newHashtags = hashtagService.saveAll(toCreate);
+    }
 
     // 4. merge return
     return Stream.concat(existingHashtags.stream(), newHashtags.stream())
@@ -109,7 +114,7 @@ public class FeedApiService {
 
     Set<Hashtag> hashtags = updateHashtags(feed, feedUpdateRequestDto.hashtags());
 
-    feed.update(feedUpdateRequestDto.content());
+    feed.update(feedUpdateRequestDto.content(), hashtags);
   }
 
   @Transactional
@@ -130,14 +135,7 @@ public class FeedApiService {
     currentHashtags.addAll(toAdd);
     currentHashtags.removeAll(toRemove);
 
-    // @todo: 업데이트 로직 추가 필요
-//    // 7. 내용도 업데이트
-//    post.setContent(dto.getContent());
-//
-//    // 8. 저장
-//    feedPostRepository.save(post); // 변경 감지로 update 수행됨
-
-    return null;
+    return currentHashtags;
   }
 
 
