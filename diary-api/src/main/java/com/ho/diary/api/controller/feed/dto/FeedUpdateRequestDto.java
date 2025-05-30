@@ -7,6 +7,7 @@ import java.util.List;
 
 public record FeedUpdateRequestDto(
   @NotNull(message = "내용을 입력해주세요.") String content,
-  List<CommonFileDto> images
+  List<CommonFileDto> images,
+  List<String> hashtags
 ) {
 }

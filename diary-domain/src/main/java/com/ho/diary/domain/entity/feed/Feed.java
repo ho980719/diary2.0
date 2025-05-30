@@ -11,7 +11,9 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -34,6 +36,13 @@ public class Feed extends BaseEntity {
   @Transient
   private List<CommonFile> images = new ArrayList<>();
 
+  @ManyToMany
+  @JoinTable(
+    name = "post_hashtags",
+    joinColumns = @JoinColumn(name = "post_id"),
+    inverseJoinColumns = @JoinColumn(name = "hashtag_id")
+  )
+  private Set<Hashtag> hashtags = new HashSet<>();
 
   private Long viewCount = 0L;
 
@@ -42,9 +51,10 @@ public class Feed extends BaseEntity {
   }
 
   @Builder
-  public Feed(User user, String content) {
+  public Feed(User user, String content, Set<Hashtag> hashtags) {
     this.user = user;
     this.content = content;
+    this.hashtags = hashtags;
   }
 
   public void update(String content) {

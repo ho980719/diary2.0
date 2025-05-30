@@ -14,4 +14,5 @@ public class FeedCreateRequestDto {
   @NotNull(message = "내용을 입력해주세요.")
   private String content;
   List<MultipartFile> images = new ArrayList<>();
+  private List<String> hashtags;
 }
